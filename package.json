@@ -1,0 +1,22 @@
+{
+  "name": "@bbq-beets/fib-tools",
+  "version": "0.1.2",
+  "description": "Functions for working with the Fibonacci sequence",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --ci --color --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bbq-beets/fib-tools.git"
+  },
+  "author": "Jonathan Clem <jclem@github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbq-beets/fib-tools/issues"
+  },
+  "homepage": "https://github.com/bbq-beets/fib-tools#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}

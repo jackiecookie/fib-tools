@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - macOS-latest
+          - ubuntu-latest
+          - windows-latest
+        node-version:
+          - 8
+          - 10
+          - 12
+    runs-on: ${{matrix.os}}
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+        with:
+          version: ${{matrix.node-version}}
+      - run: npm ci
+      - run: npm test
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+        with:
+          version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+        with:
+          version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@bbq-beets'
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{github.token}}
