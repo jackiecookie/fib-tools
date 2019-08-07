@@ -51,7 +51,7 @@ jobs:
         with:
           version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@jeremyepling-inc'
+          scope: '@pied-piper-inc'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{github.token}}
