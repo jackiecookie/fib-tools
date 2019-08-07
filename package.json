@@ -1,6 +1,6 @@
 {
   "name": "@pied-piper-inc/fib-tools",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Functions for working with the Fibonacci sequence",
   "main": "index.js",
   "scripts": {
