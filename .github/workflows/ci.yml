@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+      - uses: actions/setup-node@master
         with:
           version: ${{matrix.node-version}}
       - run: npm ci
@@ -34,10 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+      - uses: actions/setup-node@master
         with:
           version: 12
           registry-url: https://registry.npmjs.org/
+      - name: Update package version
+        run: |
+          git config user.name "Actions User"
+          git config user.email noreply@github.com
+          npm version 1.0.$(date +%s)
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -47,11 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@40a00ae373c82fa772048a64b88eeb4cb2331a63
+      - uses: actions/setup-node@master
         with:
           version: 12
           registry-url: https://npm.pkg.github.com/
           scope: '@pied-piper-inc'
+      - name: Update package version
+        run: |
+          git config user.name "Actions User"
+          git config user.email noreply@github.com
+          npm version 1.0.$(date +%s)
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{github.token}}
