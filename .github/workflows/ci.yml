@@ -47,7 +47,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-  publish-gpr:
+  publish-github-package-registry:
     needs: build
     runs-on: ubuntu-latest
     steps:
